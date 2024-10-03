@@ -1,0 +1,12 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.navbar-name {
+  margin-right: 10px;
+}
+.navbar-border {
+  border-bottom: 1px solid white;
+}
+.mat-toolbar {
+  padding: 0;
+}

@@ -1,0 +1,10 @@
+.footer-border {
+  border-top: 1px solid white;
+}
+footer {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  font-weight: lighter;
+  font-size: 12px;
+}
