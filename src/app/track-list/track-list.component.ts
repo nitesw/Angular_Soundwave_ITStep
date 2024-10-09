@@ -1,27 +1,13 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  model,
-  ViewChild,
-} from '@angular/core';
-import { ITrack } from '../track';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { ITrack } from '../models/track';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TracksService } from '../../services/tracks.service';
+import { TracksService } from '../services/tracks.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialog,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 
 export interface DialogData {
   trackTitle: string;
@@ -66,7 +52,7 @@ export class TrackListComponent implements AfterViewInit {
   }
 
   openDeleteDialog(title: string, id: number) {
-    const dialogRef = this.dialog.open(ConfirmDialog, {
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
       width: '250px',
       enterAnimationDuration: '100ms',
       exitAnimationDuration: '100ms',
@@ -94,23 +80,4 @@ export class TrackListComponent implements AfterViewInit {
       verticalPosition: 'top',
     });
   }
-}
-@Component({
-  selector: 'confirm-dialog',
-  templateUrl: './delete-confirm-dialog.html',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogTitle,
-    MatDialogContent,
-    MatPaginatorModule,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class ConfirmDialog {
-  readonly dialogRef = inject(MatDialogRef<ConfirmDialog>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly id = model(this.data.trackId);
 }

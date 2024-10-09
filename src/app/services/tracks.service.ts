@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ITrack } from '../tracks/track';
+import { ITrack } from '../models/track';
 
 const api = 'https://localhost:7015/api/';
 
