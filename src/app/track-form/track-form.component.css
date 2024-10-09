@@ -1,0 +1,18 @@
+h1 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  gap: 14px;
+}
+
+.row > * {
+  flex-grow: 1;
+}

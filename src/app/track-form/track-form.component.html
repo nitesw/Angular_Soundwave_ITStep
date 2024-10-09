@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>Create Track</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field floatLabel="always">
+        <mat-label>TrackUrl</mat-label>
+        <input formControlName="trackUrl" matInput />
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-label>ImgUrl</mat-label>
+        <input formControlName="imgUrl" matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Genre</mat-label>
+        <mat-select formControlName="genreId">
+          <mat-option value="1">Electronics</mat-option>
+          <mat-option value="2">Sport</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Additional tags</mat-label>
+        <input formControlName="additionalTags" matInput />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Artist</mat-label>
+        <input formControlName="artistName" matInput />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea formControlName="description" matInput></textarea>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isPublic" matInput>Public</mat-checkbox>
+
+    <div class="row">
+      <button mat-raised-button><mat-icon>arrow_back</mat-icon>Back</button>
+      <button mat-raised-button><mat-icon>add</mat-icon>Create</button>
+    </div>
+  </form>
+</div>

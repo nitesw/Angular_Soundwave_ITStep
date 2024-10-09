@@ -8,6 +8,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
+import { RouterLink } from '@angular/router';
 
 export interface DialogData {
   trackTitle: string;
@@ -17,7 +18,13 @@ export interface DialogData {
 @Component({
   selector: 'app-track-list',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule, MatPaginatorModule],
+  imports: [
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    RouterLink,
+  ],
   templateUrl: './track-list.component.html',
   styleUrl: './track-list.component.css',
 })

@@ -1,4 +1,10 @@
 h1 {
+  margin: 0;
+}
+.upper-panel {
   margin-top: 20px;
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
