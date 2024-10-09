@@ -25,6 +25,7 @@ export class TrackListComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'id',
     'title',
+    'image',
     'isPublic',
     'genreName',
     'actions',

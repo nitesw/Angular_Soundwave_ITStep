@@ -4,6 +4,10 @@
 .navbar-name {
   margin-right: 10px;
 }
+.navbar-name a {
+  text-decoration: none;
+  color: white;
+}
 .navbar-border {
   border-bottom: 1px solid white;
 }
