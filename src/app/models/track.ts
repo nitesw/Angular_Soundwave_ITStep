@@ -13,3 +13,16 @@ export interface ITrack {
   genreName?: string;
   userId?: string;
 }
+
+export interface CreateTrackModel {
+  title: string;
+  description: string | null;
+  track: File;
+  image: File;
+  isPublic: boolean;
+  isArchived: boolean;
+  additionalTags?: string;
+  artistName?: string;
+  genreId: number;
+  userId?: string;
+}

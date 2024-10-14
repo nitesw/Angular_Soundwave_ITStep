@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 import { RouterLink } from '@angular/router';
+import { ServerUrlService } from '../services/server-url.service';
 
 export interface DialogData {
   trackTitle: string;
@@ -31,8 +32,8 @@ export interface DialogData {
 export class TrackListComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'id',
-    'title',
     'image',
+    'title',
     'isPublic',
     'genreName',
     'actions',
@@ -41,6 +42,7 @@ export class TrackListComponent implements AfterViewInit {
 
   constructor(
     private tracksService: TracksService,
+    private serverService: ServerUrlService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {
@@ -87,5 +89,9 @@ export class TrackListComponent implements AfterViewInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  }
+
+  getServerUrl(): string {
+    return this.serverService.getServerUrl();
   }
 }

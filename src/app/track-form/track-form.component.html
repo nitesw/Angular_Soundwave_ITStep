@@ -1,50 +1,86 @@
 <div class="container">
   <h1>Create Track</h1>
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />
     </mat-form-field>
 
-    <div class="row">
-      <mat-form-field floatLabel="always">
-        <mat-label>TrackUrl</mat-label>
-        <input formControlName="trackUrl" matInput />
-      </mat-form-field>
-      <mat-form-field floatLabel="always">
-        <mat-label>ImgUrl</mat-label>
-        <input formControlName="imgUrl" matInput />
-      </mat-form-field>
+    <div class="row file-inputs">
+      <div>
+        <label for="trackFilePicker">Track*</label>
+        <div class="row">
+          <input
+            type="file"
+            #trackFilePicker
+            (change)="onTrackPicked($event)"
+            accept=".mp3,.wav"
+            hidden
+          />
+          <button
+            type="button"
+            mat-stroked-button
+            (click)="trackFilePicker.click()"
+          >
+            Upload Track
+          </button>
+          <span class="file-name">{{ selectedTrackName }}</span>
+        </div>
+      </div>
+      <div>
+        <label for="imageFilePicker">Image*</label>
+        <div class="row">
+          <input
+            type="file"
+            #imageFilePicker
+            (change)="onImagePicked($event)"
+            accept=".pjp,.jpg,.pjpeg,.jpeg,.jfif,.png"
+            hidden
+          />
+          <button
+            type="button"
+            mat-stroked-button
+            (click)="imageFilePicker.click()"
+          >
+            Upload Image
+          </button>
+          <span class="file-name">{{ selectedImageName }}</span>
+        </div>
+      </div>
     </div>
 
     <div class="row">
-      <mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Genre</mat-label>
         <mat-select formControlName="genreId">
-          <mat-option value="1">Electronics</mat-option>
-          <mat-option value="2">Sport</mat-option>
+          @for (i of genres; track i.id) {
+          <mat-option value="{{ i.id }}">{{ i.name }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Additional tags</mat-label>
         <input formControlName="additionalTags" matInput />
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Artist</mat-label>
         <input formControlName="artistName" matInput />
       </mat-form-field>
     </div>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea formControlName="description" matInput></textarea>
     </mat-form-field>
-
     <mat-checkbox formControlName="isPublic" matInput>Public</mat-checkbox>
 
     <div class="row">
-      <button mat-raised-button><mat-icon>arrow_back</mat-icon>Back</button>
-      <button mat-raised-button><mat-icon>add</mat-icon>Create</button>
+      <button type="button" mat-stroked-button (click)="back()">
+        <mat-icon>arrow_back</mat-icon>Back
+      </button>
+      <button type="submit" mat-stroked-button>
+        <mat-icon>add</mat-icon>Create
+      </button>
     </div>
   </form>
 </div>

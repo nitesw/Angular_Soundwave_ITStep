@@ -16,3 +16,14 @@ form {
 .row > * {
   flex-grow: 1;
 }
+
+.file-inputs {
+  margin-bottom: 26px;
+  color: #e9e0e4;
+}
+
+.file-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
