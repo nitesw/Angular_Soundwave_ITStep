@@ -14,8 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TracksService } from '../services/tracks.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CreateTrackModel } from '../models/track';
+import { CreateTrackModel, ITrack } from '../models/track';
 import { GenreModel } from '../models/genre';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-track-form',
@@ -34,6 +35,9 @@ import { GenreModel } from '../models/genre';
   styleUrl: './track-form.component.css',
 })
 export class TrackFormComponent implements OnInit {
+  track: ITrack | null = null;
+  editMode: boolean = false;
+  trackId: number = -1;
   form: FormGroup;
   genres: GenreModel[] = [];
   selectedImageName: string = 'No image selected...';
@@ -42,9 +46,11 @@ export class TrackFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private tracksService: TracksService
+    private tracksService: TracksService,
+    private route: ActivatedRoute
   ) {
     this.form = fb.group({
+      id: [0],
       title: ['', [Validators.required, Validators.maxLength(100)]],
       track: [null, Validators.required],
       image: [null, Validators.required],
@@ -63,6 +69,21 @@ export class TrackFormComponent implements OnInit {
     this.tracksService.getGenres().subscribe((data) => {
       this.genres = data;
     });
+
+    this.trackId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.trackId) {
+      this.editMode = true;
+
+      this.tracksService.getById(this.trackId).subscribe((data) => {
+        this.track = data;
+        this.form.controls['track'].setValidators(null);
+        this.form.controls['track'].updateValueAndValidity();
+        this.form.controls['image'].setValidators(null);
+        this.form.controls['image'].updateValueAndValidity();
+        this.form.patchValue(this.track);
+        this.form.controls['genreId'].setValue(this.track.genreId.toString());
+      });
+    }
   }
 
   back() {
@@ -114,9 +135,16 @@ export class TrackFormComponent implements OnInit {
       entity.append('track', this.form.get('track')?.value);
     }
 
-    this.tracksService.create(entity).subscribe(() => {
-      this.openSnackBar('Track is created successfully.');
-      this.back();
-    });
+    if (this.editMode) {
+      this.tracksService.edit(entity).subscribe(() => {
+        this.openSnackBar('Track updated successfully.');
+        this.back();
+      });
+    } else {
+      this.tracksService.create(entity).subscribe(() => {
+        this.openSnackBar('Track created successfully.');
+        this.back();
+      });
+    }
   }
 }

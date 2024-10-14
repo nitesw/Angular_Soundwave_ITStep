@@ -20,7 +20,7 @@ export class TracksService {
   getAll(): Observable<ITrack[]> {
     return this.httpClient.get<ITrack[]>(this.controller + 'all');
   }
-  getId(id: number): Observable<ITrack> {
+  getById(id: number): Observable<ITrack> {
     return this.httpClient.get<ITrack>(this.controller + 'getTrack?id=' + id);
   }
   deleteTrack(id: number): Observable<any> {
@@ -28,5 +28,8 @@ export class TracksService {
   }
   create(model: FormData): Observable<any> {
     return this.httpClient.post(this.controller + 'create', model);
+  }
+  edit(model: FormData): Observable<any> {
+    return this.httpClient.put(this.controller + 'edit', model);
   }
 }

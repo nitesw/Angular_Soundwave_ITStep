@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Create Track</h1>
+  <h1>{{ editMode ? "Edit" : "Create" }} Track</h1>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field appearance="outline">
       <mat-label>Title</mat-label>
@@ -79,7 +79,8 @@
         <mat-icon>arrow_back</mat-icon>Back
       </button>
       <button type="submit" mat-stroked-button>
-        <mat-icon>add</mat-icon>Create
+        {{ editMode ? "Edit" : "Create" }}
+        <mat-icon>{{ editMode ? "edit" : "add" }}</mat-icon>
       </button>
     </div>
   </form>

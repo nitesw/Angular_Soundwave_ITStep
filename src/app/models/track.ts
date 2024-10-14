@@ -26,3 +26,17 @@ export interface CreateTrackModel {
   genreId: number;
   userId?: string;
 }
+
+export interface EditTrackModel {
+  id: number;
+  title: string;
+  description: string | null;
+  track: File;
+  image: File;
+  isPublic: boolean;
+  isArchived: boolean;
+  additionalTags?: string;
+  artistName?: string;
+  genreId: number;
+  userId?: string;
+}

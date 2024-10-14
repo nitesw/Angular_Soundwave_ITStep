@@ -50,6 +50,11 @@
               >delete</mat-icon
             >
           </button>
+          <button [routerLink]="['/tracks/edit', element.id]" mat-icon-button>
+            <mat-icon class="edit-icon" style="color: lightgoldenrodyellow"
+              >edit</mat-icon
+            >
+          </button>
         </td>
       </ng-container>
 
