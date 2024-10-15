@@ -1,0 +1,27 @@
+<div class="header">
+  <h1>Welcome to Soundwave!</h1>
+  <h3>Explore the world of Soundwave and find tracks you like!</h3>
+</div>
+
+<div class="homepage">
+  @for (i of tracks; track i.id){
+  <mat-card class="card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ i.title }}</mat-card-title>
+      <mat-card-subtitle>{{ i.genreName }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="{{ getServerUrl() + i.imgUrl }}"
+      draggable="false"
+      alt="{{ i.title }}"
+    />
+    <mat-card-content
+      ><div style="margin-bottom: 5px">Description:</div>
+      {{
+        i.description !== null ? i.description : "No description."
+      }}</mat-card-content
+    >
+  </mat-card>
+  }
+</div>
