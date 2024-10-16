@@ -60,7 +60,7 @@ export class TrackFormComponent implements OnInit {
       additionalTags: ['', Validators.maxLength(40)],
       artistName: ['', Validators.maxLength(20)],
       genreId: [0, Validators.required],
-      userId: [''],
+      userId: [null],
     });
     this.form.controls['genreId'].setValue('1');
   }
@@ -125,7 +125,8 @@ export class TrackFormComponent implements OnInit {
     const entity = new FormData();
     Object.keys(this.form.controls).forEach((key) => {
       const value = this.form.get(key)?.value;
-      entity.append(key, value);
+      if(value)
+        entity.append(key, value);
     });
 
     if (this.form.get('image')?.value) {
